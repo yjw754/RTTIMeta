@@ -45,36 +45,41 @@ struct D1 : C1, C2 {
 
 };  // A1, A2, A3, A4
 
-static void rttiMetaCast(benchmark::State& state) {
+static void staticRttiCast(benchmark::State& state) {
   D1 d1;
   A1* a1 = &d1;
   // warm-up
+  A4* a4;
   benchmark::DoNotOptimize(rtti_cast<A4*>(a1));
+  B4* b4;
   benchmark::DoNotOptimize(rtti_cast<B4*>(a1));
+  C2* c2;
   benchmark::DoNotOptimize(rtti_cast<C2*>(a1));
 
   for (auto _ : state) {
-    benchmark::DoNotOptimize(rtti_cast<A4*>(a1));
-    benchmark::DoNotOptimize(rtti_cast<B4*>(a1));
-    benchmark::DoNotOptimize(rtti_cast<C2*>(a1));
+    benchmark::DoNotOptimize(a4 = rtti_cast<A4*>(a1));
+    benchmark::DoNotOptimize(b4 = rtti_cast<B4*>(a1));
+    benchmark::DoNotOptimize(c2 = rtti_cast<C2*>(a1));
   }
 }
-BENCHMARK(rttiMetaCast);
+BENCHMARK(staticRttiCast)->Iterations(1000000);
 
-static void dynamicCast(benchmark::State& state) {
+static void staticDynamicCast(benchmark::State& state) {
   D1 d1;
   A1* a1 = &d1;
+
   // warm-up
+  A4* a4;
   benchmark::DoNotOptimize(dynamic_cast<A4*>(a1));
+  B4* b4;
   benchmark::DoNotOptimize(dynamic_cast<B4*>(a1));
+  C2* c2;
   benchmark::DoNotOptimize(dynamic_cast<C2*>(a1));
 
   for (auto _ : state) {
-    benchmark::DoNotOptimize(dynamic_cast<A4*>(a1));
-    benchmark::DoNotOptimize(dynamic_cast<B4*>(a1));
-    benchmark::DoNotOptimize(dynamic_cast<C2*>(a1));
+    benchmark::DoNotOptimize(a4 = dynamic_cast<A4*>(a1));
+    benchmark::DoNotOptimize(b4 = dynamic_cast<B4*>(a1));
+    benchmark::DoNotOptimize(c2 = dynamic_cast<C2*>(a1));
   }
 }
-BENCHMARK(dynamicCast);
-
-BENCHMARK_MAIN();
+BENCHMARK(staticDynamicCast)->Iterations(1000000);
