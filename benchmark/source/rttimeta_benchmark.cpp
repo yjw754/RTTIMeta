@@ -46,28 +46,32 @@ struct D1 : C1, C2 {
 };  // A1, A2, A3, A4
 
 static void rttiMetaCast(benchmark::State& state) {
+  D1 d1;
+  A1* a1 = &d1;
+  // warm-up
+  benchmark::DoNotOptimize(rtti_cast<A4*>(a1));
+  benchmark::DoNotOptimize(rtti_cast<B4*>(a1));
+  benchmark::DoNotOptimize(rtti_cast<C2*>(a1));
+
   for (auto _ : state) {
-    D1 d1;
-    A1* a1 = &d1;
-
     benchmark::DoNotOptimize(rtti_cast<A4*>(a1));
-
     benchmark::DoNotOptimize(rtti_cast<B4*>(a1));
-
     benchmark::DoNotOptimize(rtti_cast<C2*>(a1));
   }
 }
 BENCHMARK(rttiMetaCast);
 
 static void dynamicCast(benchmark::State& state) {
+  D1 d1;
+  A1* a1 = &d1;
+  // warm-up
+  benchmark::DoNotOptimize(dynamic_cast<A4*>(a1));
+  benchmark::DoNotOptimize(dynamic_cast<B4*>(a1));
+  benchmark::DoNotOptimize(dynamic_cast<C2*>(a1));
+
   for (auto _ : state) {
-    D1 d1;
-    A1* a1 = &d1;
-
     benchmark::DoNotOptimize(dynamic_cast<A4*>(a1));
-
     benchmark::DoNotOptimize(dynamic_cast<B4*>(a1));
-
     benchmark::DoNotOptimize(dynamic_cast<C2*>(a1));
   }
 }
