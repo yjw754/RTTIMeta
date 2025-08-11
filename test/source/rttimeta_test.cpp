@@ -132,7 +132,15 @@ struct Penguin : Flyable, Swimmable {
   RTTI_META_DEFINE(Penguin, Flyable, Swimmable);
 };
 
-TEST(TypeInfo, SameTypesAreEqual) { EXPECT_STREQ(TypeName<Animal>().c_str(), "test::Animal"); }
+TEST(TypeInfo, SameTypesAreEqual) {
+#if defined(__GNUC__) && !defined(__clang__)
+  EXPECT_STREQ(TypeName<Animal>().c_str(), "test::Animal");
+#elif defined(_MSC_VER)
+  EXPECT_STREQ(TypeName<Animal>().c_str(), "struct test::Animal");
+#else
+  FAIL() << "Unsupported compiler";
+#endif
+}
 
 TEST(rtti_cast, virtual_inheritance_cast) {
   Penguin penguin;

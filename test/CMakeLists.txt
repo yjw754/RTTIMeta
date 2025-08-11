@@ -11,7 +11,7 @@ option(TEST_INSTALLED_VERSION "Test the version found by find_package" OFF)
 
 include(../cmake/tools.cmake)
 
-# ---- Dependencies ----  
+# ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
 
