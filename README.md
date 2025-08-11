@@ -2,7 +2,7 @@
 * 支持多继承、虚继承合法类型转换
 * 更快的转换，取代dynamic_cast
 * head-only
-* 支持GCC/Clang and MSVC
+* 支持GCC/MSVC
 * 支持指针和引用类型
 ## How to use
 ```C++

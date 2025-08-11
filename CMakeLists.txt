@@ -9,8 +9,8 @@ project(
   LANGUAGES CXX
 )
 
-set(CMAKE_CXX_STANDARD 14)             
-set(CMAKE_CXX_STANDARD_REQUIRED ON)   
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ---- Include guards ----
 
@@ -37,11 +37,7 @@ CPMAddPackage(
 
 # Note: globbing sources is considered bad practice as CMake's generators may not detect new files
 # automatically. Keep that in mind when changing files, or explicitly mention them here.
-# RTTIMetaHeaders 是一个 辅助性目标，专门用于：
-# 明确列出头文件列表；
-# 提供给 IDE 显示；
-# 可用于 install、打包或检查用途；
-# 不会编译、不参与构建流程。
+# RTTIMetaHeaders 是一个 辅助性目标，专门用于： 明确列出头文件列表； 提供给 IDE 显示； 可用于 install、打包或检查用途； 不会编译、不参与构建流程。
 # 它不是必须的，但对可维护性、可视化和开发体验非常有帮助
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
 add_library(RTTIMetaHeaders EXCLUDE_FROM_ALL ${headers})
@@ -56,12 +52,11 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14)
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${PROJECT_NAME} INTERFACE "$<$<BOOL:${MSVC}>:/permissive->")
 
-# Link dependencies
-# target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+# Link dependencies target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
 
 target_include_directories(
   ${PROJECT_NAME} INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-                         $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
+                            $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
 )
 
 # ---- Create an installable target ----

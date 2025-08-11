@@ -4,14 +4,14 @@ project(RTTIMetaTests LANGUAGES CXX)
 
 # ---- Options ----
 
-option(ENABLE_TEST_COVERAGE "Enable test coverage" ON)
+option(ENABLE_TEST_COVERAGE "Enable test coverage" OFF)
 option(TEST_INSTALLED_VERSION "Test the version found by find_package" OFF)
 
 # --- Import tools ----
 
 include(../cmake/tools.cmake)
 
-# ---- Dependencies ----
+# ---- Dependencies ----  
 
 include(../cmake/CPM.cmake)
 
@@ -20,6 +20,7 @@ CPMAddPackage(
   GITHUB_REPOSITORY google/googletest
   GIT_TAG main
 )
+CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
 
 if(TEST_INSTALLED_VERSION)
   find_package(RTTIMeta REQUIRED)
@@ -31,7 +32,7 @@ endif()
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(${PROJECT_NAME} ${sources})
-target_link_libraries(${PROJECT_NAME} RTTIMeta gmock gtest gtest_main pthread)
+target_link_libraries(${PROJECT_NAME} RTTIMeta gmock gtest gtest_main)
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14)
 
 # enable compiler warnings
