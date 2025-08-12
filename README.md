@@ -1,9 +1,14 @@
+[![Install](https://github.com/yjw754/RTTIMeta/actions/workflows/install.yml/badge.svg?branch=master)](https://github.com/yjw754/RTTIMeta/actions/workflows/install.yml)
+[![Ubuntu](https://github.com/yjw754/RTTIMeta/actions/workflows/ubuntu.yml/badge.svg?branch=master)](https://github.com/yjw754/RTTIMeta/actions/workflows/ubuntu.yml)
+[![Windows](https://github.com/yjw754/RTTIMeta/actions/workflows/windows.yml/badge.svg?branch=master)](https://github.com/yjw754/RTTIMeta/actions/workflows/windows.yml)
+[![Style](https://github.com/yjw754/RTTIMeta/actions/workflows/style.yml/badge.svg?branch=master)](https://github.com/yjw754/RTTIMeta/actions/workflows/style.yml)
+[![codecov](https://codecov.io/github/yjw754/rttimeta/branch/master/graph/badge.svg?token=TT3GJEUQFL)](https://codecov.io/github/yjw754/rttimeta)
 # RTTI for C++14
 * 支持多继承、虚继承合法类型转换
 * 更快的转换，取代dynamic_cast
 * head-only
 * 支持GCC/MSVC
-* 支持指针和引用类型
+* 支持指针和引用类型转换
 ## How to use
 ```C++
 struct Animal {
